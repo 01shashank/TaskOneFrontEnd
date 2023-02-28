@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import {createBrowserHistory} from 'history'
 import Dashboard from './Dashboard';
 import axios from 'axios';
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+
 
 
 const Login=(props)=>{
@@ -20,6 +23,7 @@ const Login=(props)=>{
             })
             .catch((error)=>{
                 window.alert("Wrong Credentials")
+                window.location.reload()
             })
         }
 
@@ -31,23 +35,25 @@ const Login=(props)=>{
     }
 
     return (
-        <div className='container-form'>
+        <div>
         
             <form className=' form-login'>
-                <h1 className='header1'>LOGIN</h1>
+                <div  className='container-form'>
+                    <h1 className='header1'>LOGIN</h1>
 
-                <div className='row'>
-                    <input className="inputs" type="text" required value={username} onChange={e=>setUserName(e.target.value)} name="username" id="username"  placeholder='Enter the username'/>
+                    <div className='row inputs'>
+                        <TextField id="username"  label="Enter the username" variant='outlined' margin='dense' type="text" required value={username} onChange={e=>setUserName(e.target.value)} name="username" />
+                    </div>
+
+                    <div className='row inputs'>
+                        <TextField id="password"  label="Enter the password" variant='outlined' margin='dense' className="" type="password" required value={password} onChange={e=>setPassword(e.target.value)} name="password"/>
+                    </div>
+
+
+                    <div className='row btn-login'>
+                        <Button variant='contained' style={{height: "40px",width:"100px", "border-radius":"20px","background-color":"black","color":"white"}} color='' size='medium'  type='primary' onClick={e=>{e.preventDefault();loginUser()}}><b>Submit</b></Button>
+                    </div>
                 </div>
-
-                <div className='row'>
-                    <input className="inputs" type="password" required value={password} onChange={e=>setPassword(e.target.value)} name="password" id="password" placeholder='Enter the password'/>
-                </div>
-
-                <div className='row '>
-                    <button className='btn-login' type='primary' onClick={e=>{e.preventDefault();loginUser()}}>Submit</button>
-                </div>
-
             </form>
         </div>
 
